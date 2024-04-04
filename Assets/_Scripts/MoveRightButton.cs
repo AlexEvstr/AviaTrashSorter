@@ -26,6 +26,7 @@ public class MoveRightButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         while (_buttonPressed)
         {
             _player.transform.Translate(Vector2.right * _speed * Time.deltaTime);
+            _player.GetComponent<SpriteRenderer>().flipX = false;
             yield return null;
         }
     }
