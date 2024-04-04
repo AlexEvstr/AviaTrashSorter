@@ -5,11 +5,12 @@ using UnityEngine;
 public class JumpBehavior : MonoBehaviour
 {
     private bool _canJump = false;
+    private float _force = 5.0f;
     public void JumpButton()
     {
         if (_canJump)
         {
-            GetComponent<Rigidbody2D>().AddForce(new Vector3(0, 7, 0), ForceMode2D.Impulse);
+            GetComponent<Rigidbody2D>().AddForce(new Vector3(0, 700, 0), ForceMode2D.Impulse);
             _canJump = false;
         }
     }
@@ -19,6 +20,14 @@ public class JumpBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             _canJump = true;
+        }
+        else if (collision.gameObject.CompareTag("Trash"))
+        {
+            _canJump = true;
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(collision.gameObject.GetComponent<Rigidbody2D>().velocity * _force, ForceMode2D.Force);
+
+            //collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(prevVelocity.x,
+            //     -prevVelocity.y * Mathf.Clamp01(bounceFactor));
         }
     }
 }
