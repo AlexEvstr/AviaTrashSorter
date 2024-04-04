@@ -17,7 +17,7 @@ public class JumpBehavior : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (collision.gameObject.CompareTag("Platform") || collision.gameObject.CompareTag("TrashBin"))
         {
             _canJump = true;
         }
@@ -25,9 +25,6 @@ public class JumpBehavior : MonoBehaviour
         {
             _canJump = true;
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(collision.gameObject.GetComponent<Rigidbody2D>().velocity * _force, ForceMode2D.Force);
-
-            //collision.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(prevVelocity.x,
-            //     -prevVelocity.y * Mathf.Clamp01(bounceFactor));
         }
     }
 }
